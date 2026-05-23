@@ -889,6 +889,382 @@
     transform: translateY(0);
   }
 
+  /* ── CART TOGGLE BUTTON ── */
+  .cart-toggle {
+    background: none;
+    border: 0.5px solid var(--border);
+    padding: 9px 14px;
+    cursor: none;
+    color: var(--dark);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.3s;
+  }
+  .cart-toggle:hover { border-color: var(--gold); color: var(--gold); }
+
+  .cart-count {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 10px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+  }
+
+  /* ── CART DRAWER ── */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,18,8,0.4);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 420px;
+    background: var(--white);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.23,1,0.32,1);
+    display: flex;
+    flex-direction: column;
+    border-left: 0.5px solid var(--border);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-header {
+    padding: 28px 32px 20px;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: var(--muted);
+    cursor: none;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  .cart-close:hover { color: var(--gold); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 32px;
+  }
+
+  .cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--border);
+    align-items: flex-start;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .cart-item-thumb {
+    width: 72px; height: 80px;
+    background: var(--gold-ultra);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cart-item-info { flex: 1; }
+
+  .cart-item-cat {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3px;
+  }
+
+  .cart-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-mat {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-btn {
+    width: 26px; height: 26px;
+    border: 0.5px solid var(--border);
+    background: none;
+    font-size: 16px;
+    color: var(--muted);
+    cursor: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+  .qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  .qty-num {
+    font-size: 14px;
+    width: 24px;
+    text-align: center;
+  }
+
+  .cart-item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .cart-item-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: none;
+    font-size: 12px;
+    padding: 2px;
+    transition: color 0.2s;
+  }
+  .cart-item-remove:hover { color: #c0392b; }
+
+  .cart-footer {
+    padding: 20px 32px 28px;
+    border-top: 0.5px solid var(--border);
+    background: var(--gold-ultra);
+  }
+
+  .cart-summary { margin-bottom: 16px; }
+
+  .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 0;
+  }
+
+  .cart-summary-row.total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--dark);
+    border-top: 0.5px solid var(--border);
+    margin-top: 8px;
+    padding-top: 12px;
+  }
+
+  .btn-checkout {
+    width: 100%;
+    background: var(--dark);
+    border: none;
+    padding: 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    cursor: none;
+    transition: background 0.3s;
+  }
+  .btn-checkout:hover { background: var(--gold); color: var(--dark); }
+
+  /* ── CHECKOUT MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,18,8,0.6);
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .checkout-modal {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -48%) scale(0.97);
+    width: min(700px, 95vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--white);
+    z-index: 301;
+    padding: 48px 52px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+    border: 0.5px solid var(--border);
+  }
+  .checkout-modal.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: var(--muted);
+    cursor: none;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--gold); }
+
+  .checkout-steps {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+    gap: 0;
+  }
+
+  .step {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 6px 0;
+    transition: color 0.3s;
+    white-space: nowrap;
+  }
+  .step.active { color: var(--gold); font-weight: 500; }
+  .step.done { color: var(--dark); }
+
+  .step-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+    margin: 0 16px;
+  }
+
+  .checkout-form { margin: 24px 0; }
+
+  .checkout-title { margin-bottom: 8px; }
+
+  /* Payment methods */
+  .pay-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0 20px;
+  }
+
+  .pay-method {
+    border: 0.5px solid var(--border);
+    padding: 18px 14px;
+    text-align: center;
+    cursor: none;
+    transition: all 0.25s;
+  }
+  .pay-method.active { border-color: var(--gold); background: var(--gold-ultra); }
+  .pay-method:hover { border-color: var(--gold-light); }
+
+  .pay-icon { font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+  .pay-name { font-size: 12px; font-weight: 400; margin-bottom: 4px; }
+  .pay-info { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
+
+  .pay-detail { margin-bottom: 16px; }
+
+  .pix-box {
+    background: var(--gold-ultra);
+    border: 0.5px solid var(--border);
+    padding: 24px 28px;
+    text-align: center;
+  }
+
+  /* Shipping options */
+  .ship-options { display: flex; flex-direction: column; gap: 8px; }
+
+  .ship-opt {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 0.5px solid var(--border);
+    padding: 14px 16px;
+    cursor: none;
+    transition: border-color 0.2s;
+  }
+  .ship-opt:has(input:checked) { border-color: var(--gold); background: var(--gold-ultra); }
+  .ship-opt input { accent-color: var(--gold); }
+  .ship-opt-body { flex: 1; }
+  .ship-opt-name { font-size: 13px; }
+  .ship-opt-info { font-size: 11px; color: var(--muted); }
+  .ship-opt-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--dark); }
+
+  /* Order summary in checkout */
+  .order-summary {
+    background: var(--gold-ultra);
+    border: 0.5px solid var(--border);
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+
+  .order-summary-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .order-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+
+  .order-line.total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--dark);
+    border-top: 0.5px solid var(--border);
+    padding-top: 12px;
+    margin-top: 8px;
+  }
+
   @media (max-width: 900px) {
     nav { padding: 18px 24px; }
     .nav-links { display: none; }
@@ -921,8 +1297,275 @@
     <li><a href="#processo">Processo</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
-  <a href="#contato" class="nav-cta">Encomendar</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <button class="cart-toggle" onclick="toggleCart()" aria-label="Abrir carrinho">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M3 3h1.5l2.5 9h7l2-6H6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9" cy="16" r="1.2" fill="currentColor"/>
+        <circle cx="14" cy="16" r="1.2" fill="currentColor"/>
+      </svg>
+      <span class="cart-count" id="cartCount" style="display:none">0</span>
+    </button>
+    <a href="#contato" class="nav-cta">Encomendar</a>
+  </div>
 </nav>
+
+<!-- ── CART DRAWER ── -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div>
+      <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Seu carrinho</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px">Joias selecionadas</div>
+    </div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom:16px;opacity:0.3">
+        <path d="M8 8h4l6 22h16l5-14H16" stroke="#B8960C" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="38" r="2.5" fill="#B8960C" opacity="0.5"/>
+        <circle cx="32" cy="38" r="2.5" fill="#B8960C" opacity="0.5"/>
+      </svg>
+      <p style="font-size:13px;color:var(--muted)">Seu carrinho está vazio</p>
+      <p style="font-size:11px;color:var(--muted);margin-top:6px;opacity:0.6">Adicione peças do catálogo</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">R$ 0</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Frete</span>
+        <span style="color:var(--gold)">A calcular</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total</span>
+        <span id="cartTotal">R$ 0</span>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="openCheckout()">Finalizar pedido →</button>
+    <p style="font-size:10px;text-align:center;color:var(--muted);margin-top:12px;letter-spacing:1px">Pagamento seguro via Mercado Pago / Pix</p>
+  </div>
+</aside>
+
+<!-- ── CHECKOUT MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeCheckout()"></div>
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-steps">
+    <div class="step active" id="step1btn">1 · Dados</div>
+    <div class="step-line"></div>
+    <div class="step" id="step2btn">2 · Entrega</div>
+    <div class="step-line"></div>
+    <div class="step" id="step3btn">3 · Pagamento</div>
+  </div>
+  <button class="modal-close" onclick="closeCheckout()">✕</button>
+
+  <!-- Step 1: Personal data -->
+  <div class="checkout-step" id="checkStep1">
+    <div class="checkout-title">
+      <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Seus dados</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300">Quem vai receber?</div>
+    </div>
+    <div class="checkout-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Nome completo</label>
+          <input class="form-input co-input" id="co_nome" type="text" placeholder="Seu nome">
+        </div>
+        <div class="form-field">
+          <label class="form-label">CPF</label>
+          <input class="form-input co-input" id="co_cpf" type="text" placeholder="000.000.000-00" maxlength="14">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">E-mail</label>
+          <input class="form-input co-input" id="co_email" type="email" placeholder="seu@email.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label">WhatsApp</label>
+          <input class="form-input co-input" id="co_phone" type="tel" placeholder="(00) 00000-0000">
+        </div>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="goStep(2)">Continuar →</button>
+  </div>
+
+  <!-- Step 2: Delivery -->
+  <div class="checkout-step" id="checkStep2" style="display:none">
+    <div class="checkout-title">
+      <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Entrega</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300">Onde entregar?</div>
+    </div>
+    <div class="checkout-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">CEP</label>
+          <input class="form-input co-input" id="co_cep" type="text" placeholder="00000-000" maxlength="9" oninput="fetchCep(this)">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Estado</label>
+          <input class="form-input co-input" id="co_estado" type="text" placeholder="PR">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field" style="flex:2">
+          <label class="form-label">Rua</label>
+          <input class="form-input co-input" id="co_rua" type="text" placeholder="Nome da rua">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Número</label>
+          <input class="form-input co-input" id="co_num" type="text" placeholder="Nº">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Bairro</label>
+          <input class="form-input co-input" id="co_bairro" type="text" placeholder="Bairro">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Cidade</label>
+          <input class="form-input co-input" id="co_cidade" type="text" placeholder="Cidade">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Complemento</label>
+        <input class="form-input co-input" id="co_comp" type="text" placeholder="Apto, bloco... (opcional)">
+      </div>
+      <div style="margin-top:16px">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Opção de frete</div>
+        <div class="ship-options">
+          <label class="ship-opt">
+            <input type="radio" name="frete" value="pac" checked>
+            <div class="ship-opt-body">
+              <div class="ship-opt-name">PAC · Correios</div>
+              <div class="ship-opt-info">5–8 dias úteis</div>
+            </div>
+            <div class="ship-opt-price">R$ 18</div>
+          </label>
+          <label class="ship-opt">
+            <input type="radio" name="frete" value="sedex">
+            <div class="ship-opt-body">
+              <div class="ship-opt-name">SEDEX · Correios</div>
+              <div class="ship-opt-info">1–3 dias úteis</div>
+            </div>
+            <div class="ship-opt-price">R$ 32</div>
+          </label>
+          <label class="ship-opt">
+            <input type="radio" name="frete" value="retirada">
+            <div class="ship-opt-body">
+              <div class="ship-opt-name">Retirada pessoal</div>
+              <div class="ship-opt-info">Combinar com a Jiliane</div>
+            </div>
+            <div class="ship-opt-price" style="color:var(--gold)">Grátis</div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px">
+      <button class="btn-checkout" style="background:var(--muted);flex:0 0 auto;padding:14px 20px" onclick="goStep(1)">← Voltar</button>
+      <button class="btn-checkout" onclick="goStep(3)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Payment -->
+  <div class="checkout-step" id="checkStep3" style="display:none">
+    <div class="checkout-title">
+      <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Pagamento</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300">Como pagar?</div>
+    </div>
+    <div class="pay-methods">
+      <div class="pay-method active" onclick="selectPay('pix', this)">
+        <div class="pay-icon">◈</div>
+        <div class="pay-name">Pix</div>
+        <div class="pay-info">Aprovação imediata</div>
+      </div>
+      <div class="pay-method" onclick="selectPay('cartao', this)">
+        <div class="pay-icon">▣</div>
+        <div class="pay-name">Cartão de crédito</div>
+        <div class="pay-info">Até 6x sem juros</div>
+      </div>
+      <div class="pay-method" onclick="selectPay('boleto', this)">
+        <div class="pay-icon">≡</div>
+        <div class="pay-name">Boleto</div>
+        <div class="pay-info">Venc. em 3 dias</div>
+      </div>
+    </div>
+
+    <!-- Pix -->
+    <div id="payPix" class="pay-detail">
+      <div class="pix-box">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Chave Pix</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:8px">jiliane@joias.com.br</div>
+        <div style="font-size:12px;color:var(--muted)">Após o pagamento, envie o comprovante pelo WhatsApp</div>
+      </div>
+    </div>
+
+    <!-- Cartão -->
+    <div id="payCartao" class="pay-detail" style="display:none">
+      <div class="checkout-form">
+        <div class="form-field">
+          <label class="form-label">Número do cartão</label>
+          <input class="form-input co-input" type="text" placeholder="0000 0000 0000 0000" maxlength="19">
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Validade</label>
+            <input class="form-input co-input" type="text" placeholder="MM/AA" maxlength="5">
+          </div>
+          <div class="form-field">
+            <label class="form-label">CVV</label>
+            <input class="form-input co-input" type="text" placeholder="000" maxlength="3">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Nome no cartão</label>
+          <input class="form-input co-input" type="text" placeholder="Como está no cartão">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Parcelas</label>
+          <select class="form-select co-input">
+            <option>1x sem juros</option>
+            <option>2x sem juros</option>
+            <option>3x sem juros</option>
+            <option>6x sem juros</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boleto -->
+    <div id="payBoleto" class="pay-detail" style="display:none">
+      <div class="pix-box">
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">O boleto será gerado após a confirmação do pedido e enviado para o seu e-mail. Validade de 3 dias úteis.</div>
+      </div>
+    </div>
+
+    <!-- Order summary -->
+    <div class="order-summary" id="orderSummary"></div>
+
+    <div style="display:flex;gap:12px;margin-top:20px">
+      <button class="btn-checkout" style="background:var(--muted);flex:0 0 auto;padding:14px 20px" onclick="goStep(2)">← Voltar</button>
+      <button class="btn-checkout" onclick="placeOrder()" id="placeOrderBtn">Confirmar pedido ✦</button>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="checkout-step" id="checkSuccess" style="display:none;text-align:center;padding:40px 0">
+    <div style="font-size:48px;margin-bottom:20px">✦</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);margin-bottom:12px">Pedido confirmado!</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.8;max-width:380px;margin:0 auto 28px">Você receberá um e-mail com os detalhes. A Jiliane vai entrar em contato pelo WhatsApp para confirmar os detalhes da sua peça.</p>
+    <div style="background:var(--gold-ultra);border:0.5px solid var(--border);padding:20px 28px;display:inline-block;margin-bottom:28px">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Número do pedido</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px" id="orderNumber"></div>
+    </div>
+    <br>
+    <button class="btn-checkout" style="display:inline-block;width:auto;padding:14px 32px" onclick="closeCheckout();clearCart()">Fechar</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1070,7 +1713,7 @@
         <div class="product-mat">Prata 950 · Pedra natural</div>
         <div class="product-bottom">
           <div class="product-price">R$ 380</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:1,name:'Folhas Eternas',cat:'Anel',mat:'Prata 950 · Pedra natural',price:380})">Pedir</button>
         </div>
       </div>
     </div>
@@ -1106,7 +1749,7 @@
         <div class="product-mat">Resina natural · Corrente banhada</div>
         <div class="product-bottom">
           <div class="product-price">R$ 220</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:2,name:'Flor Preservada',cat:'Colar',mat:'Resina natural · Corrente banhada',price:220})">Adicionar</button>
         </div>
       </div>
     </div>
@@ -1142,7 +1785,7 @@
         <div class="product-mat">Prata 950 · Resina botânica</div>
         <div class="product-bottom">
           <div class="product-price">R$ 290</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:3,name:'Gota Silvestre',cat:'Brinco',mat:'Prata 950 · Resina botânica',price:290})">Adicionar</button>
         </div>
       </div>
     </div>
@@ -1177,7 +1820,7 @@
         <div class="product-mat">Prata 950 · Charms botânicos</div>
         <div class="product-bottom">
           <div class="product-price">R$ 450</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:4,name:'Jardim Secreto',cat:'Pulseira',mat:'Prata 950 · Charms botânicos',price:450})">Adicionar</button>
         </div>
       </div>
     </div>
@@ -1209,7 +1852,7 @@
         <div class="product-mat">Folha natural · Banho ouro 18k</div>
         <div class="product-bottom">
           <div class="product-price">R$ 180</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:5,name:'Folha Dourada',cat:'Colar',mat:'Folha natural · Banho ouro 18k',price:180})">Adicionar</button>
         </div>
       </div>
     </div>
@@ -1242,7 +1885,7 @@
         <div class="product-mat">Prata 950 · Semente natural</div>
         <div class="product-bottom">
           <div class="product-price">R$ 320</div>
-          <button class="product-cta">Pedir</button>
+          <button class="product-cta" onclick="addToCart({id:6,name:'Semente da Mata',cat:'Anel',mat:'Prata 950 · Semente natural',price:320})">Adicionar</button>
         </div>
       </div>
     </div>
@@ -1478,7 +2121,7 @@
         <div class="contact-icon">✉</div>
         <div>
           <div class="contact-detail-label">E-mail</div>
-          <div class="contact-detail-val">jiliane@joias.com.br</div>
+          <div class="contact-detail-val">jiliane415@gmail.com</div>
         </div>
       </div>
     </div>
@@ -1527,51 +2170,256 @@
 </footer>
 
 <script>
-  // Custom cursor
+  // ── Custom cursor ──────────────────────────────────────────────────────────
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
-
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+    cursor.style.transform = `translate(${mx-4}px,${my-4}px)`;
   });
-
   function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+    rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+    ring.style.transform = `translate(${rx-16}px,${ry-16}px)`;
     requestAnimationFrame(animRing);
   }
   animRing();
 
-  // Filter products
+  // ── Filter ────────────────────────────────────────────────────────────────
   function filterProducts(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.product-card').forEach(card => {
-      const show = cat === 'todos' || card.dataset.cat === cat;
-      card.style.display = show ? 'flex' : 'none';
+      card.style.display = (cat==='todos' || card.dataset.cat===cat) ? 'flex' : 'none';
     });
   }
 
-  // Scroll reveal
+  // ── Scroll reveal ─────────────────────────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
+    entries.forEach((e,i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        setTimeout(() => e.target.classList.add('visible'), i*80);
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, {threshold:0.12});
   reveals.forEach(el => observer.observe(el));
 
-  // Nav scroll effect
+  // Nav shadow
   window.addEventListener('scroll', () => {
     document.querySelector('nav').style.boxShadow =
       window.scrollY > 40 ? '0 2px 40px rgba(184,150,12,0.08)' : 'none';
   });
+
+  // ── CART STATE ────────────────────────────────────────────────────────────
+  let cart = [];
+
+  function addToCart(product) {
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({...product, qty: 1});
+    }
+    renderCart();
+    openCart();
+    // pulse count badge
+    const badge = document.getElementById('cartCount');
+    badge.style.transform = 'scale(1.4)';
+    setTimeout(() => badge.style.transform = 'scale(1)', 200);
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(id);
+    else renderCart();
+  }
+
+  function clearCart() {
+    cart = [];
+    renderCart();
+  }
+
+  function cartTotal() {
+    return cart.reduce((s,i) => s + i.price * i.qty, 0);
+  }
+
+  function fmt(n) {
+    return 'R$ ' + n.toLocaleString('pt-BR');
+  }
+
+  function renderCart() {
+    const count = cart.reduce((s,i) => s+i.qty, 0);
+    const badge = document.getElementById('cartCount');
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
+
+    const empty = document.getElementById('cartEmpty');
+    const footer = document.getElementById('cartFooter');
+    const itemsEl = document.getElementById('cartItems');
+
+    if (cart.length === 0) {
+      empty.style.display = 'flex';
+      footer.style.display = 'none';
+      // clear items except empty div
+      [...itemsEl.children].forEach(c => { if(c.id!=='cartEmpty') c.remove(); });
+      return;
+    }
+
+    empty.style.display = 'none';
+    footer.style.display = 'block';
+
+    // rebuild items
+    [...itemsEl.children].forEach(c => { if(c.id!=='cartEmpty') c.remove(); });
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-thumb">
+          <svg width="40" height="44" viewBox="0 0 40 44" fill="none">
+            <rect x="12" y="16" width="16" height="22" rx="8" fill="#D4AF37" opacity="0.7"/>
+            <path d="M12 24 Q6 20 4 14 Q8 18 13 23" fill="#4A7A3A" opacity="0.8"/>
+            <path d="M28 24 Q34 20 36 14 Q32 18 27 23" fill="#4A7A3A" opacity="0.8"/>
+            <circle cx="4" cy="12" r="3" fill="#D4AF37" opacity="0.7"/>
+            <circle cx="36" cy="12" r="3" fill="#D4AF37" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="cart-item-info">
+          <div class="cart-item-cat">${item.cat}</div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-mat">${item.mat}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+            <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕ remover</button>
+          </div>
+        </div>
+        <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
+      `;
+      itemsEl.appendChild(div);
+    });
+
+    const total = cartTotal();
+    document.getElementById('cartSubtotal').textContent = fmt(total);
+    document.getElementById('cartTotal').textContent = fmt(total);
+  }
+
+  // ── CART OPEN/CLOSE ───────────────────────────────────────────────────────
+  function openCart() {
+    document.getElementById('cartDrawer').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  }
+
+  function toggleCart() {
+    document.getElementById('cartDrawer').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('open');
+  }
+
+  // ── CHECKOUT ──────────────────────────────────────────────────────────────
+  let currentStep = 1;
+
+  function openCheckout() {
+    if (cart.length === 0) return;
+    // close cart
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+    // open modal
+    document.getElementById('modalOverlay').classList.add('open');
+    document.getElementById('checkoutModal').classList.add('open');
+    goStep(1);
+    buildOrderSummary();
+  }
+
+  function closeCheckout() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.getElementById('checkoutModal').classList.remove('open');
+  }
+
+  function goStep(n) {
+    currentStep = n;
+    [1,2,3].forEach(i => {
+      document.getElementById('checkStep'+i).style.display = i===n ? 'block' : 'none';
+      const btn = document.getElementById('step'+i+'btn');
+      btn.classList.toggle('active', i===n);
+      btn.classList.toggle('done', i<n);
+    });
+    document.getElementById('checkSuccess').style.display = 'none';
+    buildOrderSummary();
+  }
+
+  function buildOrderSummary() {
+    const el = document.getElementById('orderSummary');
+    if (!el) return;
+    const frete = document.querySelector('input[name="frete"]:checked');
+    const freteVal = frete?.value === 'sedex' ? 32 : frete?.value === 'pac' ? 18 : 0;
+    const sub = cartTotal();
+    const total = sub + freteVal;
+    el.innerHTML = `
+      <div class="order-summary-title">Resumo do pedido</div>
+      ${cart.map(i => `<div class="order-line"><span>${i.name} x${i.qty}</span><span>${fmt(i.price*i.qty)}</span></div>`).join('')}
+      <div class="order-line"><span>Frete</span><span>${freteVal === 0 ? 'Grátis' : fmt(freteVal)}</span></div>
+      <div class="order-line total"><span>Total</span><span>${fmt(total)}</span></div>
+    `;
+  }
+
+  document.querySelectorAll('input[name="frete"]').forEach(r => r.addEventListener('change', buildOrderSummary));
+
+  function selectPay(type, el) {
+    document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+    el.classList.add('active');
+    ['payPix','payCartao','payBoleto'].forEach(id => document.getElementById(id).style.display='none');
+    const map = {pix:'payPix', cartao:'payCartao', boleto:'payBoleto'};
+    document.getElementById(map[type]).style.display='block';
+  }
+
+  function placeOrder() {
+    const nome = document.getElementById('co_nome')?.value;
+    if (!nome) { alert('Preencha seu nome na etapa 1'); goStep(1); return; }
+    // Show success
+    [1,2,3].forEach(i => document.getElementById('checkStep'+i).style.display='none');
+    document.getElementById('checkSuccess').style.display='block';
+    const orderNum = 'JL-' + Date.now().toString().slice(-6);
+    document.getElementById('orderNumber').textContent = orderNum;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  }
+
+  // CEP auto-fill (ViaCEP)
+  async function fetchCep(input) {
+    let cep = input.value.replace(/\D/g,'');
+    if (cep.length === 8) {
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const d = await r.json();
+        if (!d.erro) {
+          document.getElementById('co_rua').value = d.logradouro || '';
+          document.getElementById('co_bairro').value = d.bairro || '';
+          document.getElementById('co_cidade').value = d.localidade || '';
+          document.getElementById('co_estado').value = d.uf || '';
+        }
+      } catch(e) {}
+    }
+    // format
+    if (cep.length > 5) input.value = cep.slice(0,5)+'-'+cep.slice(5,8);
+  }
+
+  // CPF mask
+  document.getElementById('co_cpf')?.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'');
+    if(v.length>3) v = v.slice(0,3)+'.'+v.slice(3);
+    if(v.length>7) v = v.slice(0,7)+'.'+v.slice(7);
+    if(v.length>11) v = v.slice(0,11)+'-'+v.slice(11,13);
+    this.value = v;
+  });
+
 </script>
 </body>
 </html>
